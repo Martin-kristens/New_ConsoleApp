@@ -7,7 +7,9 @@ namespace New_ConsoleApp.Services;
 
 public class MenuService : IMenuService
 {
+    //kopplar samman denna klass med ContactService klassen
     private readonly ContactService _contactService = new ContactService();
+    //min huvudmeny 
     public void ShowMainMenu()
     {
         while (true)
@@ -54,6 +56,7 @@ public class MenuService : IMenuService
         }
     }
 
+    //denna metod tar hand om avslut av programmet då användaren trycker på 0
     private void ShowExitOption()
     {
         Console.Clear();
@@ -72,6 +75,10 @@ public class MenuService : IMenuService
         }
 
     }
+
+    //metdoden tar in data från användaren och skickar datan till ContactService för att se om det inte redan 
+    //finns en kontakt med samma e-post
+    //ContactService skickar sedan tillbaka resultatet hit
     private void ShowAddContactOption()
     {
         var contact = new Contact();
@@ -108,6 +115,7 @@ public class MenuService : IMenuService
         }
     }
 
+    //denna metod ansvarar för att visa en lista med användare
     private void ShowAllContacts()
     {
         var allContacts = _contactService.GetContactsFromList();
@@ -127,6 +135,7 @@ public class MenuService : IMenuService
         }
     }
 
+    //denna metod ansvarar för att visa en detaljerad kontakt
     private void ShowContactDetails()
     {
         Console.Clear();
@@ -147,6 +156,7 @@ public class MenuService : IMenuService
         }
     }
 
+    //denna metod ansvarar för att skicka nödvändig data till ContactService 
     private void ShowUpdateOption()
     {
         Console.Clear();
@@ -162,7 +172,7 @@ public class MenuService : IMenuService
         }
 
         var contact = new Contact();
-
+        //kommer man hit har man hittat rätt kontakt och användaren kan nu uppdatera sin data 
         Console.Clear();
 
         Console.Write("First Name: ");
@@ -198,6 +208,10 @@ public class MenuService : IMenuService
         }
     }
 
+    //denna metod ansvarar för att ta emot data från användaren som sedan skickas vidare till ContactService 
+    //klassen som utför en kontroll om det finns en kontakt eller  inte baserat på e-post 
+    //finns det en kontakt så tas kontakten bort från listan och skickar tillbaka resultate hit som sedan skriver 
+    //ut ett meddelande om det gick bra eller inte
     private void ShowDeleteOption()
     {
         Console.Clear();

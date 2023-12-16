@@ -13,6 +13,7 @@ public class FileService : IFileService
         _filePath = filePath;
     }
 
+    //denna metod ska spara till fil
     public bool SaveContentToFile(string content)
     {
         try
@@ -31,6 +32,7 @@ public class FileService : IFileService
         return false;
     }
 
+    //denna metod ska hämta från fil
     public string GetContentFromFile()
     {
         try

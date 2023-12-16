@@ -7,9 +7,12 @@ namespace New_ConsoleApp.Services;
 
 public class ContactService : IContactService
 {
+    //en privat lista av Contact 
     private readonly List<Contact> _contacts = new List<Contact>();
+    //kopplar på fileservice för att kunna spara och hämta från fil
     private readonly FileService _fileService = new FileService(@"C:\Education\CSharp\content.json");
 
+    //denna metod sa lägga till en användare i listan och skicka resultatet till SaveContentToFile metoden
     public bool AddContactToList(Contact contact)
     {
         try
@@ -29,6 +32,7 @@ public class ContactService : IContactService
         return false;
     }
 
+    //ska hämta lista med användare, listan hämtas från metoden GetContentFromFile
     public IEnumerable<Contact> GetContactsFromList()
     {
         try
@@ -45,6 +49,7 @@ public class ContactService : IContactService
 
     }
 
+    //metoden ska ge detaljerad information av en kontakt baserat på e-post 
     public Contact GetContactDetails(string email)
     {
         try
@@ -56,6 +61,7 @@ public class ContactService : IContactService
         return null!;
     }
 
+    //metoden ska ta bort en kontakt baserat på e-post
     public Contact GetDeleteContact(string email)
     {
         try
@@ -71,6 +77,7 @@ public class ContactService : IContactService
 
     }
 
+    //metoden ska uppdatera en kontakt baserat på e-post
     public Contact GetUpdateContact(string email)
     {
         try

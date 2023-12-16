@@ -4,6 +4,7 @@ using New_ConsoleApp.Interfaces;
 
 namespace New_ConsoleApp.Models;
 
+//egenskaper för min kontakt
 public class Contact : IContact
 {
     public string FirstName { get; set; } = null!;

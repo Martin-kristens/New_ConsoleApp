@@ -7,6 +7,7 @@ public class FileService_Tests
 {
     [Fact]
     // Integrationstest
+    //kollar om metoden kan hämta data från fil
     public void GetContentFromFileShould_ReturnCorrectContent_IfFileExists()
     {
         // Arrange
@@ -28,6 +29,7 @@ public class FileService_Tests
     [Fact]
 
     //integrationstest
+    //kollar om metoden kan spara till fil
     public void SaveToFileShould_ReturnFalse_IfFilePathDoNotExists()
     {
         // Arrange

@@ -7,7 +7,7 @@ namespace New_ConsoleApp.Tests;
 public class ContactService_Tests
 {
     [Fact]
-
+    //kollar om metoden kan lägga till en användare till listan
     public void AddToListShould_AddOneContactToContactList_ThenReturnTrue()
     {
         // Arrange
@@ -24,7 +24,7 @@ public class ContactService_Tests
     }
 
     [Fact]
-
+    //kollar om metoden kan hämta och visa en lista med användare
     public void GetAllFromListShould_GetAllContactsInContactList_ThenReturnListOfContacts()
     {
         // Arrannge
@@ -49,7 +49,7 @@ public class ContactService_Tests
     }
 
     [Fact]
-
+    //kollar om metoden kan visa detaljerad information om en användare 
     public void GetContactDetailsFromListShould_GetContactDetailInformationFromContactList_ThenReturnDetailOfContact()
     {
         // Arrannge
@@ -79,7 +79,7 @@ public class ContactService_Tests
     }
 
     [Fact]
-
+    //kollar om metoden uppdaterar en kontakt
     public void GetContactUpdateFromListShould_GetContactUpdateInformationFromContactList_ThenReturnUpdatedInformationOfContact()
     {
         // Arrannge
@@ -120,7 +120,7 @@ public class ContactService_Tests
     }
 
     [Fact]
-
+    //kollar om metoden tar bort en kontakt 
     public void GetDeleteContactShould_DeleteOneContactFromList_ThenReturnUpdatedList()
     {
         // Arrange
