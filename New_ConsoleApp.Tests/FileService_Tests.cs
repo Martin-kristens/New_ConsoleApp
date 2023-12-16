@@ -12,6 +12,7 @@ public class FileService_Tests
     {
         // Arrange
         string filePath = @"C:\Education\CSharp\content.json";
+        //här används dynamic för att skapa ett anonymt objekt med förväntade egenskaper 
         dynamic expectedContent = new { FirstName = "Martin", LastName = "Kristensen" };
         FileService fileService = new FileService(filePath);
 
