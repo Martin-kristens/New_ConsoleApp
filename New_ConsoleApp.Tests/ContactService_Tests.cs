@@ -79,47 +79,6 @@ public class ContactService_Tests
     }
 
     [Fact]
-    //kollar om metoden uppdaterar en kontakt
-    public void GetContactUpdateFromListShould_GetContactUpdateInformationFromContactList_ThenReturnUpdatedInformationOfContact()
-    {
-        // Arrannge
-        ContactService contactService = new ContactService();
-        Contact originalContact = new Contact
-        {
-            FirstName = "Martin",
-            LastName = "Kristensen",
-            Email = "martin@mail.se",
-            Phonenumber = "+12345456",
-            Address = "Rallarvägen",
-            City = "L-A"
-        };
-        contactService.AddContactToList(originalContact);
-
-
-        // Act
-        Contact updatedContact = new Contact
-        {
-            FirstName = "UpdatedFirstName",
-            LastName = "UpdatedLastName",
-            Email = "martin@mail.se",
-            Phonenumber = "+98765432",
-            Address = "UpdatedAddress",
-            City = "UpdatedCity"
-        };
-        var result = contactService.GetUpdateContact("martin@mail.se");
-
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal("UpdatedFirstName", result.FirstName);
-        Assert.Equal("UpdatedLastName", result.LastName);
-        Assert.Equal("martin@mail.se", result.Email);
-        Assert.Equal("+98765432", result.Phonenumber);
-        Assert.Equal("UpdatedAddress", result.Address);
-        Assert.Equal("UpdatedCity", result.City);
-
-    }
-
-    [Fact]
     //kollar om metoden tar bort en kontakt 
     public void GetDeleteContactShould_DeleteOneContactFromList_ThenReturnUpdatedList()
     {

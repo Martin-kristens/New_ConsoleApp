@@ -8,6 +8,6 @@ namespace New_ConsoleApp.Interfaces
         Contact GetContactDetails(string email);
         IEnumerable<Contact> GetContactsFromList();
         Contact GetDeleteContact(string email);
-        Contact GetUpdateContact(string email);
+        //Contact GetUpdateContact(string email);
     }
 }

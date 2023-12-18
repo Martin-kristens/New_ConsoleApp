@@ -147,8 +147,8 @@ public class MenuService : IMenuService
 
         if (findContactInList != null)
         {
-            Console.WriteLine($"CONTACT: {findContactInList.FirstName} {findContactInList.LastName} {findContactInList.Phonenumber} {findContactInList.Email}" +
-                $"{findContactInList.Address} {findContactInList.City}");
+            Console.WriteLine($"CONTACT: {findContactInList.FirstName} {findContactInList.LastName} {findContactInList.Phonenumber} {findContactInList.Email} " +
+                $" {findContactInList.Address} {findContactInList.City}");
         }
         else
         {
@@ -162,14 +162,29 @@ public class MenuService : IMenuService
         Console.Clear();
 
         Console.Write("Type in the email of the contact you would like to update: ");
-        var email = Console.ReadLine()!;
-        var existingContact = _contactService.GetUpdateContact(email);
+        var contactToDelete = Console.ReadLine()!;
+        //var existingContact = _contactService.GetUpdateContact(email);
+        //var existingContact = _contactService.GetContactDetails(email);
 
-        if (existingContact == null)
+        //if (existingContact == null)
+        //{
+        //    Console.WriteLine("No contact found with the specified email.");
+        //    return;
+        //}
+
+        var deletedContact = _contactService.GetDeleteContact(contactToDelete);
+
+        if (deletedContact != null)
         {
-            Console.WriteLine("No contact found with the specified email.");
+            Console.WriteLine("This contact will be uppdated. Press any key to update.");
+        }
+        else
+        {
+            Console.WriteLine("No email could be found that matches the one you typed in");
             return;
         }
+
+        Console.ReadKey();
 
         var contact = new Contact();
         //kommer man hit har man hittat rätt kontakt och användaren kan nu uppdatera sin data 
@@ -184,6 +199,7 @@ public class MenuService : IMenuService
         Console.Write("Phone Number: ");
         contact.Phonenumber = Console.ReadLine()!;
 
+        
         Console.Write("Email: ");
         contact.Email = Console.ReadLine()!;
 
@@ -206,6 +222,8 @@ public class MenuService : IMenuService
         {
             Console.WriteLine("The email was already existing");
         }
+
+        Console.ReadKey();
     }
 
     //denna metod ansvarar för att ta emot data från användaren som sedan skickas vidare till ContactService 

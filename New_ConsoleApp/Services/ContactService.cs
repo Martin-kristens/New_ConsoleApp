@@ -5,10 +5,17 @@ using System.Diagnostics;
 
 namespace New_ConsoleApp.Services;
 
+/// <summary>
+/// denna klass ska kunna lägga till en kontakt, visa detaljerad information om en kontakt, visa en lista med 
+/// kontakter, uppdatera en kontakt, ta bort en kontakt. Använder mig av CRUD - create, read, update, delete
+/// </summary>
+
 public class ContactService : IContactService
 {
     //en privat lista av Contact 
     private readonly List<Contact> _contacts = new List<Contact>();
+    //private string json = string.Empty;
+
     //kopplar på fileservice för att kunna spara och hämta från fil
     private readonly FileService _fileService = new FileService(@"C:\Education\CSharp\content.json");
 
@@ -68,6 +75,7 @@ public class ContactService : IContactService
         {
             Contact contactToDelete = _contacts.FirstOrDefault(x => x.Email == email)!;
             _contacts.Remove(contactToDelete);
+            _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contacts));
 
             return contactToDelete;
         }
@@ -76,34 +84,4 @@ public class ContactService : IContactService
         return null!;
 
     }
-
-    //metoden ska uppdatera en kontakt baserat på e-post
-    public Contact GetUpdateContact(string email)
-    {
-        try
-        {
-            Contact contactToUpdate = _contacts.FirstOrDefault(x => x.Email == email)!;
-
-            if (contactToUpdate != null)
-            {
-                // Uppdatera kontaktinformationen här
-                contactToUpdate.FirstName = "UpdatedFirstName";
-                contactToUpdate.LastName = "UpdatedLastName";
-                contactToUpdate.Phonenumber = "+98765432";
-                contactToUpdate.Address = "UpdatedAddress";
-                contactToUpdate.City = "UpdatedCity";
-
-                return contactToUpdate;
-            }
-            //_contacts.Remove(contactToUpdate);
-
-            //return contactToUpdate;
-
-
-        }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
-        return null!;
-    }
-
-
 }
