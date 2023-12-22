@@ -1,9 +1,12 @@
-﻿
-
-using New_ConsoleApp.Interfaces;
+﻿using New_ConsoleApp.Interfaces;
 using New_ConsoleApp.Models;
 
 namespace New_ConsoleApp.Services;
+
+/// <summary>
+/// Denna klass ansvarar för interaktionen med användaren, den visar menyval, ansvarar för att anvädnaren fyller i rätt när man vill
+/// lägga till en kontakt i listan, visa hela listan av kontakter, visa detaljerad info eller ta bort en kontakt.
+/// </summary>
 
 public class MenuService : IMenuService
 {
@@ -20,8 +23,7 @@ public class MenuService : IMenuService
             Console.WriteLine($"{"1.",-4} Add Contact");
             Console.WriteLine($"{"2.",-4} View All Contacts");
             Console.WriteLine($"{"3.",-4} View Contact detail");
-            Console.WriteLine($"{"4.",-4} Update Contact");
-            Console.WriteLine($"{"5.",-4} Delete Contact");
+            Console.WriteLine($"{"4.",-4} Delete Contact");
             Console.WriteLine($"{"0.",-4} Exit Application");
 
             Console.Write("Enter your option: ");
@@ -40,9 +42,6 @@ public class MenuService : IMenuService
                     ShowContactDetails();
                     break;
                 case "4":
-                    ShowUpdateOption();
-                    break;
-                case "5":
                     ShowDeleteOption();
                     break; ;
                 case "0":
@@ -141,89 +140,23 @@ public class MenuService : IMenuService
         Console.Clear();
 
         Console.Write("Type in the email of the contact you would like to view: ");
-        var email = Console.ReadLine()!;
+        string inputEmail = Console.ReadLine()!;
+        Console.Clear();
 
-        var findContactInList = _contactService.GetContactDetails(email);
+        Contact contact = new Contact();
+        contact.Email = inputEmail;
+
+        var findContactInList = _contactService.GetContactDetails(inputEmail);
 
         if (findContactInList != null)
         {
-            Console.WriteLine($"CONTACT: {findContactInList.FirstName} {findContactInList.LastName} {findContactInList.Phonenumber} {findContactInList.Email} " +
+            Console.WriteLine($"CONTACT:\n\n {findContactInList.FirstName} {findContactInList.LastName} {findContactInList.Phonenumber} {findContactInList.Email} " +
                 $" {findContactInList.Address} {findContactInList.City}");
         }
         else
         {
             Console.WriteLine("No email could be found that matches the one you typed in");
         }
-    }
-
-    //denna metod ansvarar för att skicka nödvändig data till ContactService 
-    private void ShowUpdateOption()
-    {
-        Console.Clear();
-
-        Console.Write("Type in the email of the contact you would like to update: ");
-        var contactToDelete = Console.ReadLine()!;
-        //var existingContact = _contactService.GetUpdateContact(email);
-        //var existingContact = _contactService.GetContactDetails(email);
-
-        //if (existingContact == null)
-        //{
-        //    Console.WriteLine("No contact found with the specified email.");
-        //    return;
-        //}
-
-        var deletedContact = _contactService.GetDeleteContact(contactToDelete);
-
-        if (deletedContact != null)
-        {
-            Console.WriteLine("This contact will be uppdated. Press any key to update.");
-        }
-        else
-        {
-            Console.WriteLine("No email could be found that matches the one you typed in");
-            return;
-        }
-
-        Console.ReadKey();
-
-        var contact = new Contact();
-        //kommer man hit har man hittat rätt kontakt och användaren kan nu uppdatera sin data 
-        Console.Clear();
-
-        Console.Write("First Name: ");
-        contact.FirstName = Console.ReadLine()!;
-
-        Console.Write("Last Name: ");
-        contact.LastName = Console.ReadLine()!;
-
-        Console.Write("Phone Number: ");
-        contact.Phonenumber = Console.ReadLine()!;
-
-        
-        Console.Write("Email: ");
-        contact.Email = Console.ReadLine()!;
-
-        Console.Write("Address: ");
-        contact.Address = Console.ReadLine()!;
-
-        Console.Write("City: ");
-        contact.City = Console.ReadLine()!;
-
-        var addedContact = _contactService.AddContactToList(contact);
-
-
-
-
-        if (addedContact)
-        {
-            Console.WriteLine("Contact has been updated");
-        }
-        else
-        {
-            Console.WriteLine("The email was already existing");
-        }
-
-        Console.ReadKey();
     }
 
     //denna metod ansvarar för att ta emot data från användaren som sedan skickas vidare till ContactService 
@@ -237,11 +170,16 @@ public class MenuService : IMenuService
         Console.Write("Type in the email of the contact you would like to delete: ");
         var contactToDelete = Console.ReadLine()!;
 
+        Console.Clear();
+
+        Contact contact = new Contact();
+        contact.Email = contactToDelete;
+
         var deletedContact = _contactService.GetDeleteContact(contactToDelete);
 
         if (deletedContact != null)
         {
-            Console.WriteLine("Contact has been deleted");
+            Console.WriteLine($"{deletedContact.Email} has been deleted");
         }
         else
         {

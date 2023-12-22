@@ -1,5 +1,6 @@
 ﻿using New_ConsoleApp.Models;
 using New_ConsoleApp.Services;
+using System.Collections.Generic;
 
 
 namespace New_ConsoleApp.Tests;
@@ -41,18 +42,19 @@ public class ContactService_Tests
         contactService.AddContactToList(contact);
 
         // Act
-        IEnumerable<Contact> result = contactService.GetContactsFromList();
+        var result = contactService.GetContactsFromList();
 
         // Assert
         Assert.NotNull(result);
         Assert.True(result.Any());
+        Assert.IsAssignableFrom<IEnumerable<Contact>>(result);
     }
 
     [Fact]
     //kollar om metoden kan visa detaljerad information om en användare 
     public void GetContactDetailsFromListShould_GetContactDetailInformationFromContactList_ThenReturnDetailOfContact()
     {
-        // Arrannge
+        // Arrange
         ContactService contactService = new ContactService();
         Contact contact = new Contact
         {
@@ -70,12 +72,7 @@ public class ContactService_Tests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("Martin", result.FirstName);
-        Assert.Equal("Kristensen", result.LastName);
-        Assert.Equal("martin@mail.se", result.Email);
-        Assert.Equal("+12345456", result.Phonenumber);
-        Assert.Equal("Rallarvägen", result.Address);
-        Assert.Equal("L-A", result.City);
+        Assert.Equal(contact, result);
     }
 
     [Fact]
@@ -98,9 +95,7 @@ public class ContactService_Tests
 
         // Assert
         Assert.NotNull(deletedContact);
-        Assert.Equal("Martin", deletedContact.FirstName);
-        Assert.Equal("Kristensen", deletedContact.LastName);
-        Assert.Equal("martin@mail.se", deletedContact.Email);
+        Assert.Equal(contact, deletedContact);
 
         // Check if the contact is removed from the list
         Contact result = contactService.GetContactDetails("martin@mail.se");
