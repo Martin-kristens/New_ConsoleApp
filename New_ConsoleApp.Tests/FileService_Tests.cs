@@ -16,7 +16,7 @@ public class FileService_Tests
         dynamic expectedContent = new { FirstName = "Martin", LastName = "Kristensen" };
         FileService fileService = new FileService(filePath);
 
-        // Först måste vi skapa filen och skriva innehållet i den
+        // Först måste man skapa filen och skriva innehållet i den
         fileService.SaveContentToFile(JsonConvert.SerializeObject(expectedContent));
 
         // Act

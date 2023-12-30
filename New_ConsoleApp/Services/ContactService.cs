@@ -14,7 +14,6 @@ public class ContactService : IContactService
 {
     //en privat lista av Contact 
     private readonly List<Contact> _contacts = new List<Contact>();
-    //private string json = string.Empty;
 
     //kopplar på fileservice för att kunna spara och hämta från fil
     private readonly FileService _fileService = new FileService(@"C:\Education\CSharp\content.json");

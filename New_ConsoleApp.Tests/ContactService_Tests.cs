@@ -1,6 +1,5 @@
 ﻿using New_ConsoleApp.Models;
 using New_ConsoleApp.Services;
-using System.Collections.Generic;
 
 
 namespace New_ConsoleApp.Tests;
@@ -96,8 +95,6 @@ public class ContactService_Tests
         // Assert
         Assert.NotNull(deletedContact);
         Assert.Equal(contact, deletedContact);
-
-        // Check if the contact is removed from the list
         Contact result = contactService.GetContactDetails("martin@mail.se");
         Assert.Null(result);
     }

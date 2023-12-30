@@ -1,6 +1,4 @@
-﻿
-
-using New_ConsoleApp.Interfaces;
+﻿using New_ConsoleApp.Interfaces;
 
 namespace New_ConsoleApp.Models;
 
